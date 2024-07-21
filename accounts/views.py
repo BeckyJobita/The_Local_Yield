@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from Core.models import User
 from django.contrib import messages
+from django.contrib.auth import login, authenticate, logout
 from django.core.mail import send_mail
 import random
 import string
@@ -96,4 +97,10 @@ def userlogin(request):
         pass
     else:
         return render(request, 'accounts/login.html')
+
+def userlogout(request):
+    if request.method == 'POST':
+        logout(request)
+        messages.success(request, "You are now logged out")
+        return redirect('index')
 
